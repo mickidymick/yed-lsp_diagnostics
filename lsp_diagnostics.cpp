@@ -44,32 +44,32 @@ static void update_buffer() {
             {
                 relative_path_if_subtree(path.c_str(), s);
                 yed_glyph_traverse(s, git) {
-                    yed_append_to_line_no_undo(buff, row, *git);
+                    yed_append_to_line_no_undo(buff, row, git);
                 }
-                yed_append_to_line_no_undo(buff, row, G(':'));
+                yed_append_to_line_no_undo(buff, row, GLYPH(":"));
             }
             {
                 snprintf(s, sizeof(s), "%d", d.line);
                 yed_glyph_traverse(s, git) {
-                    yed_append_to_line_no_undo(buff, row, *git);
+                    yed_append_to_line_no_undo(buff, row, git);
                 }
-                yed_append_to_line_no_undo(buff, row, G(':'));
+                yed_append_to_line_no_undo(buff, row, GLYPH(":"));
             }
 
             {
                 snprintf(s, sizeof(s), "%d", yed_line_idx_to_col(line, d.byte_start));
                 yed_glyph_traverse(s, git) {
-                    yed_append_to_line_no_undo(buff, row, *git);
+                    yed_append_to_line_no_undo(buff, row, git);
                 }
-                yed_append_to_line_no_undo(buff, row, G(':'));
-                yed_append_to_line_no_undo(buff, row, G(' '));
-                yed_append_to_line_no_undo(buff, row, G(' '));
-                yed_append_to_line_no_undo(buff, row, G(' '));
-                yed_append_to_line_no_undo(buff, row, G(' '));
+                yed_append_to_line_no_undo(buff, row, GLYPH(":"));
+                yed_append_to_line_no_undo(buff, row, GLYPH(" "));
+                yed_append_to_line_no_undo(buff, row, GLYPH(" "));
+                yed_append_to_line_no_undo(buff, row, GLYPH(" "));
+                yed_append_to_line_no_undo(buff, row, GLYPH(" "));
             }
             {
                 yed_glyph_traverse(d.message.c_str(), git) {
-                    yed_append_to_line_no_undo(buff, row, *git);
+                    yed_append_to_line_no_undo(buff, row, git);
                 }
             }
 
@@ -330,8 +330,8 @@ static void update(yed_event *event) {
                 yed_glyph_traverse(chopped.c_str(), git) {
                     step_attr();
                     yed_set_cursor(event->frame->top + i - 1, l);
-                    yed_screen_print_single_cell_glyph_over(*git);
-                    l += yed_get_glyph_width(*git);
+                    yed_screen_print_single_cell_glyph_over(git);
+                    l += yed_get_glyph_width(git);
                 }
 
                 for (; l <= event->frame->left + event->frame->width - 1; l += 1) {
